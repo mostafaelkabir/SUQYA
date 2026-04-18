@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Suqya+ — Platform Roadmap | Detailed Phase Brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --navy: #0f1d32;
+    --navy-deep: #091427;
+    --navy-light: #1e3352;
+    --paper: #faf6ec;
+    --paper-warm: #f5efe0;
+    --cream: #ede3cc;
+    --ink: #0a1524;
+    --ink-soft: #3a4a5f;
+    --ink-lighter: #6b7a90;
+    --ink-faint: #9aa5b8;
+
+    --gold: #c9a24a;
+    --gold-deep: #a6822e;
+    --gold-soft: #e0c484;
+    --red: #b83f3b;
+    --red-soft: #d26965;
+
+    --p0: #0d6e4f;
+    --p0-deep: #074a34;
+    --p1: #1e5a9e;
+    --p1-deep: #143d6b;
+    --p2: #1b7577;
+    --p2-deep: #0e4f51;
+    --p3: #5d3b7a;
+    --p3-deep: #3d2452;
+    --p4: #b8731f;
+    --p4-deep: #7e4e15;
+    --p5: #2a2a2e;
+    --p5-deep: #141416;
+
+    --rule: rgba(15, 29, 50, 0.12);
+    --rule-strong: rgba(15, 29, 50, 0.28);
+    --rule-soft: rgba(15, 29, 50, 0.06);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-weight: 400;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "kern", "ss01", "cv11";
+  }
+
+  /* ========= TOPOGRAPHIC BACKDROP ========= */
+  .topo {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.45;
+  }
+  .topo svg { width: 100%; height: 100%; }
+
+  /* ========= CONTAINER ========= */
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 56px 64px 80px;
+  }
+
+  /* ========= COVER ========= */
+  .cover {
+    padding-bottom: 48px;
+    margin-bottom: 56px;
+    border-bottom: 1px solid var(--rule-strong);
+    position: relative;
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 200px;
+    height: 3px;
+    background: var(--gold);
+  }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--navy-light);
+    margin-bottom: 24px;
+  }
+  .eyebrow-line { width: 32px; height: 1px; background: var(--gold-deep); }
+  .eyebrow-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--navy-light); }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-variation-settings: "opsz" 144;
+    font-size: clamp(48px, 5.5vw, 80px);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    color: var(--navy-deep);
+    margin-bottom: 20px;
+  }
+  h1 em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--gold-deep);
+  }
+
+  .cover-sub {
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: 760px;
+    margin-bottom: 32px;
+    font-variation-settings: "opsz" 24;
+  }
+
+  .cover-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    max-width: 960px;
+  }
+  .cover-meta {
+    padding: 16px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .cover-meta-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 6px;
+  }
+  .cover-meta-val {
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--navy-deep);
+    letter-spacing: -0.01em;
+  }
+  .cover-meta-val em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--gold-deep);
+  }
+
+  /* ========= JOURNEY NAV ========= */
+  .journey {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(250, 246, 236, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 18px 0;
+    margin: -12px -64px 56px;
+    padding-left: 64px;
+    padding-right: 64px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .journey-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+  }
+  .journey-inner::before {
+    content: '';
+    position: absolute;
+    top: 14px;
+    left: 20px;
+    right: 20px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--p0), var(--p1), var(--p2), var(--p3), var(--p4), var(--p5));
+    opacity: 0.6;
+    z-index: 0;
+  }
+
+  .jstep {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.25s ease;
+    padding: 4px;
+    border-radius: 4px;
+  }
+  .jstep:hover { transform: translateY(-2px); }
+
+  .jstep-dot {
+    width: 28px;
+    height: 28px;
+    margin: 0 auto 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.25s ease;
+  }
+  .jstep:nth-child(1) .jstep-dot { background: var(--p0); }
+  .jstep:nth-child(2) .jstep-dot { background: var(--p1); }
+  .jstep:nth-child(3) .jstep-dot { background: var(--p2); }
+  .jstep:nth-child(4) .jstep-dot { background: var(--p3); }
+  .jstep:nth-child(5) .jstep-dot { background: var(--p4); }
+  .jstep:nth-child(6) .jstep-dot { background: var(--p5); }
+
+  .jstep-name {
+    font-family: 'Fraunces', serif;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--navy-deep);
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+  }
+  .jstep-state {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5px;
+    letter-spacing: 0.1em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  /* ========= PHASE SECTION ========= */
+  .phase {
+    margin-bottom: 72px;
+    scroll-margin-top: 100px;
+  }
+
+  /* phase header with giant numeral */
+  .phase-head {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 40px;
+    align-items: stretch;
+    margin-bottom: 40px;
+    position: relative;
+  }
+
+  .phase-numeral {
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+    color: #fff;
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 220px;
+  }
+  .phase-numeral::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(255,255,255,0.14), transparent 55%),
+      radial-gradient(circle at 80% 80%, rgba(0,0,0,0.22), transparent 55%);
+    pointer-events: none;
+  }
+  .phase[data-p="0"] .phase-numeral { background: linear-gradient(135deg, var(--p0), var(--p0-deep)); }
+  .phase[data-p="1"] .phase-numeral { background: linear-gradient(135deg, var(--p1), var(--p1-deep)); }
+  .phase[data-p="2"] .phase-numeral { background: linear-gradient(135deg, var(--p2), var(--p2-deep)); }
+  .phase[data-p="3"] .phase-numeral { background: linear-gradient(135deg, var(--p3), var(--p3-deep)); }
+  .phase[data-p="4"] .phase-numeral { background: linear-gradient(135deg, var(--p4), var(--p4-deep)); }
+  .phase[data-p="5"] .phase-numeral { background: linear-gradient(135deg, var(--p5), var(--p5-deep)); }
+
+  .phase-numeral-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+    z-index: 1;
+  }
+  .phase-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 700;
+    opacity: 0.9;
+  }
+  .phase-icon-svg {
+    width: 36px;
+    height: 36px;
+    opacity: 0.75;
+  }
+  .phase-big-number {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-variation-settings: "opsz" 144;
+    font-size: 138px;
+    line-height: 0.85;
+    letter-spacing: -0.06em;
+    position: relative;
+    z-index: 1;
+    color: #fff;
+  }
+
+  .phase-intro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 14px;
+  }
+  .phase-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-variation-settings: "opsz" 144;
+    font-size: clamp(40px, 4.5vw, 60px);
+    line-height: 1.0;
+    letter-spacing: -0.025em;
+    color: var(--navy-deep);
+  }
+  .phase-name em {
+    font-style: italic;
+    font-weight: 400;
+  }
+  .phase[data-p="0"] .phase-name em { color: var(--p0); }
+  .phase[data-p="1"] .phase-name em { color: var(--p1); }
+  .phase[data-p="2"] .phase-name em { color: var(--p2); }
+  .phase[data-p="3"] .phase-name em { color: var(--p3); }
+  .phase[data-p="4"] .phase-name em { color: var(--p4); }
+  .phase[data-p="5"] .phase-name em { color: var(--p5); }
+
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    width: fit-content;
+  }
+  .status-badge.complete { background: rgba(13,110,79,0.1); color: var(--p0); border: 1px solid rgba(13,110,79,0.3); }
+  .status-badge.next { background: rgba(184,63,59,0.1); color: var(--red); border: 1px solid rgba(184,63,59,0.3); }
+  .status-badge.planned { background: rgba(27,117,119,0.1); color: var(--p2); border: 1px solid rgba(27,117,119,0.3); }
+  .status-badge.indicative { background: rgba(93,59,122,0.1); color: var(--p3); border: 1px solid rgba(93,59,122,0.3); }
+  .status-badge.vision { background: rgba(184,115,31,0.1); color: var(--p4); border: 1px solid rgba(184,115,31,0.3); }
+  .status-badge.vision-v { background: rgba(42,42,46,0.1); color: var(--p5); border: 1px solid rgba(42,42,46,0.3); }
+
+  .status-detail {
+    font-family: 'Fraunces', serif;
+    font-size: 15px;
+    font-style: italic;
+    color: var(--ink-soft);
+    line-height: 1.45;
+    font-variation-settings: "opsz" 18;
+  }
+
+  /* ========= EXPERIENCE + BIG BET (hero row) ========= */
+  .hero-row {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 28px;
+    margin-bottom: 36px;
+  }
+
+  .experience-card {
+    background: #fff;
+    border-radius: 6px;
+    padding: 28px 30px;
+    border: 1px solid var(--rule);
+    border-left: 4px solid;
+    position: relative;
+  }
+  .phase[data-p="0"] .experience-card { border-left-color: var(--p0); }
+  .phase[data-p="1"] .experience-card { border-left-color: var(--p1); }
+  .phase[data-p="2"] .experience-card { border-left-color: var(--p2); }
+  .phase[data-p="3"] .experience-card { border-left-color: var(--p3); }
+  .phase[data-p="4"] .experience-card { border-left-color: var(--p4); }
+  .phase[data-p="5"] .experience-card { border-left-color: var(--p5); }
+
+  .card-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 14px;
+  }
+  .card-label-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+  .phase[data-p="0"] .card-label-dot { background: var(--p0); }
+  .phase[data-p="1"] .card-label-dot { background: var(--p1); }
+  .phase[data-p="2"] .card-label-dot { background: var(--p2); }
+  .phase[data-p="3"] .card-label-dot { background: var(--p3); }
+  .phase[data-p="4"] .card-label-dot { background: var(--p4); }
+  .phase[data-p="5"] .card-label-dot { background: var(--p5); }
+
+  .experience-text {
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--navy-deep);
+    font-variation-settings: "opsz" 36;
+    letter-spacing: -0.005em;
+  }
+  .experience-text strong {
+    font-weight: 600;
+  }
+
+  .bigbet-card {
+    background: var(--navy-deep);
+    color: var(--paper-warm);
+    border-radius: 6px;
+    padding: 28px 30px;
+    position: relative;
+    overflow: hidden;
+  }
+  .bigbet-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 15% 15%, rgba(201,162,74,0.14), transparent 55%),
+      radial-gradient(circle at 85% 85%, rgba(30,51,82,0.5), transparent 55%);
+    pointer-events: none;
+  }
+  .bigbet-card .card-label { color: var(--gold-soft); position: relative; z-index: 1; }
+  .bigbet-card .card-label-dot { background: var(--gold); }
+
+  .bigbet-text {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.55;
+    color: var(--paper-warm);
+    position: relative;
+    z-index: 1;
+    font-variation-settings: "opsz" 24;
+  }
+
+  /* ========= VALUE STRIP ========= */
+  .value-strip {
+    background: linear-gradient(135deg, rgba(201,162,74,0.08), rgba(201,162,74,0.02));
+    border: 1px solid rgba(201,162,74,0.35);
+    border-radius: 6px;
+    padding: 20px 28px;
+    margin-bottom: 36px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .value-strip-label {
+    flex-shrink: 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    padding-top: 3px;
+    min-width: 56px;
+  }
+  .value-strip-text {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--navy-deep);
+    font-weight: 500;
+    font-variation-settings: "opsz" 18;
+  }
+
+  /* ========= DETAIL SECTIONS GRID ========= */
+  .detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 28px;
+  }
+  .detail-grid.three { grid-template-columns: repeat(3, 1fr); }
+
+  .detail-block {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 22px 24px;
+  }
+  .detail-block-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .detail-block-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--navy-deep);
+  }
+  .detail-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+  .detail-block-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-faint);
+    font-weight: 600;
+  }
+
+  .item-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .item-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink);
+    padding-left: 2px;
+  }
+  .item-list li::before {
+    content: '';
+    flex-shrink: 0;
+    width: 5px;
+    height: 5px;
+    margin-top: 8px;
+    border-radius: 50%;
+    background: var(--ink-faint);
+  }
+  .phase[data-p="0"] .item-list li::before { background: var(--p0); }
+  .phase[data-p="1"] .item-list li::before { background: var(--p1); }
+  .phase[data-p="2"] .item-list li::before { background: var(--p2); }
+  .phase[data-p="3"] .item-list li::before { background: var(--p3); }
+  .phase[data-p="4"] .item-list li::before { background: var(--p4); }
+  .phase[data-p="5"] .item-list li::before { background: var(--p5); }
+
+  /* specialized blocks */
+  .detail-block.risks .item-list li::before,
+  .detail-block.prereq.warn .item-list li::before {
+    background: var(--red);
+    width: 6px;
+    height: 6px;
+    border-radius: 1px;
+    margin-top: 7px;
+  }
+  .detail-block.risks {
+    background: linear-gradient(180deg, #fff 0%, rgba(184,63,59,0.03) 100%);
+    border-color: rgba(184,63,59,0.25);
+  }
+  .detail-block.risks .detail-block-title { color: var(--red); }
+
+  .detail-block.learnings {
+    background: linear-gradient(180deg, #fff 0%, rgba(201,162,74,0.04) 100%);
+    border-color: rgba(201,162,74,0.3);
+  }
+  .detail-block.learnings .detail-block-title { color: var(--gold-deep); }
+  .detail-block.learnings .item-list li {
+    font-family: 'Fraunces', serif;
+    font-size: 13.5px;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--navy-deep);
+    font-variation-settings: "opsz" 18;
+  }
+  .detail-block.learnings .item-list li::before {
+    content: '?';
+    background: transparent !important;
+    width: auto;
+    height: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gold-deep);
+    border-radius: 0;
+    margin-top: 0;
+    line-height: 1.5;
+  }
+
+  .detail-block.deliverables {
+    background: linear-gradient(180deg, #fff 0%, rgba(15,29,50,0.025) 100%);
+    border-color: rgba(15,29,50,0.2);
+  }
+  .detail-block.deliverables .item-list li::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    margin-top: 6px;
+    background: transparent;
+    border: 1.5px solid;
+  }
+  .phase[data-p="0"] .detail-block.deliverables .item-list li::before { border-color: var(--p0); }
+  .phase[data-p="1"] .detail-block.deliverables .item-list li::before { border-color: var(--p1); }
+  .phase[data-p="2"] .detail-block.deliverables .item-list li::before { border-color: var(--p2); }
+  .phase[data-p="3"] .detail-block.deliverables .item-list li::before { border-color: var(--p3); }
+  .phase[data-p="4"] .detail-block.deliverables .item-list li::before { border-color: var(--p4); }
+  .phase[data-p="5"] .detail-block.deliverables .item-list li::before { border-color: var(--p5); }
+
+  /* prereq special - when blocking */
+  .detail-block.prereq.critical {
+    background: linear-gradient(180deg, #fff 0%, rgba(184,63,59,0.04) 100%);
+    border: 2px solid var(--red);
+    position: relative;
+  }
+  .detail-block.prereq.critical::after {
+    content: '⚠ GATE';
+    position: absolute;
+    top: -9px;
+    right: 16px;
+    padding: 2px 8px;
+    background: var(--red);
+    color: #fff;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    font-weight: 700;
+    border-radius: 2px;
+  }
+  .detail-block.prereq.critical .detail-block-title { color: var(--red); }
+
+  .prereq-none {
+    font-family: 'Fraunces', serif;
+    font-size: 14.5px;
+    font-style: italic;
+    color: var(--p0);
+    padding: 8px 0;
+    font-variation-settings: "opsz" 18;
+  }
+
+  /* ========= DIVIDER ========= */
+  .phase-divider {
+    margin: 20px 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--rule-strong) 20%, var(--rule-strong) 80%, transparent);
+  }
+
+  /* ========= THE GATE — STANDOUT CALLOUT ========= */
+  .gate-callout {
+    background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy-light) 100%);
+    color: var(--paper-warm);
+    padding: 48px 56px;
+    border-radius: 8px;
+    margin: 72px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .gate-callout::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 15% 15%, rgba(201,162,74,0.16), transparent 55%),
+      radial-gradient(circle at 85% 85%, rgba(184,63,59,0.16), transparent 55%);
+    pointer-events: none;
+  }
+  .gate-label {
+    position: relative;
+    z-index: 1;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--red-soft);
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  .gate-title {
+    position: relative;
+    z-index: 1;
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-variation-settings: "opsz" 144;
+    font-size: clamp(32px, 3.5vw, 46px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: #fff;
+    margin-bottom: 24px;
+    max-width: 900px;
+  }
+  .gate-title em {
+    font-style: italic;
+    color: var(--gold-soft);
+    font-weight: 400;
+  }
+  .gate-body {
+    position: relative;
+    z-index: 1;
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: rgba(245,239,224,0.88);
+    max-width: 860px;
+    font-variation-settings: "opsz" 20;
+  }
+  .gate-body strong {
+    color: var(--gold-soft);
+    font-weight: 600;
+  }
+
+  /* ========= FOOTER ========= */
+  .footer {
+    margin-top: 40px;
+    padding-top: 28px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+  .footer strong { color: var(--navy-deep); font-weight: 700; }
+
+  /* ========= RESPONSIVE ========= */
+  @media (max-width: 1100px) {
+    .phase-head { grid-template-columns: 180px 1fr; gap: 28px; }
+    .phase-big-number { font-size: 108px; }
+    .detail-grid.three { grid-template-columns: repeat(2, 1fr); }
+    .hero-row { grid-template-columns: 1fr; }
+    .cover-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 720px) {
+    .page { padding: 32px 20px 60px; }
+    .journey { margin-left: -20px; margin-right: -20px; padding-left: 20px; padding-right: 20px; }
+    .journey-inner { overflow-x: auto; }
+    .jstep { min-width: 80px; }
+    .phase-head { grid-template-columns: 1fr; }
+    .phase-numeral { min-height: 160px; padding: 20px; }
+    .phase-big-number { font-size: 96px; }
+    .detail-grid { grid-template-columns: 1fr; }
+    .cover-grid { grid-template-columns: 1fr; }
+    .gate-callout { padding: 32px 24px; }
+  }
+  @media print {
+    @page { size: A3; margin: 12mm; }
+    body { background: #fff; }
+    .topo { display: none; }
+    .journey { display: none; }
+    .phase { break-inside: avoid-page; }
+    .gate-callout { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- topographic backdrop -->
+<div class="topo">
+  <svg viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none" stroke="#c9a24a" stroke-width="0.4" opacity="0.3">
+      <path d="M0,180 Q400,120 800,200 T1600,160"/>
+      <path d="M0,240 Q400,180 800,260 T1600,220"/>
+      <path d="M0,300 Q400,240 800,320 T1600,280"/>
+      <path d="M0,400 Q400,340 800,420 T1600,380"/>
+      <path d="M0,560 Q400,500 800,580 T1600,540"/>
+      <path d="M0,620 Q400,560 800,640 T1600,600"/>
+      <path d="M0,780 Q400,720 800,800 T1600,760"/>
+    </g>
+    <g fill="none" stroke="#0f1d32" stroke-width="0.3" opacity="0.12">
+      <path d="M120,0 Q160,300 120,600 T180,1000"/>
+      <path d="M1480,0 Q1440,300 1480,600 T1420,1000"/>
+    </g>
+  </svg>
+</div>
+
+<div class="page">
+
+  <!-- ============ COVER ============ -->
+  <section class="cover">
+    <div class="eyebrow">
+      <span class="eyebrow-line"></span>
+      <span>Suqya+ Platform</span>
+      <span class="eyebrow-dot"></span>
+      <span>Detailed Phase Brief</span>
+      <span class="eyebrow-dot"></span>
+      <span>For SK Leadership</span>
+    </div>
+    <h1>From a single map<br/>to a <em>national water<br/>intelligence system.</em></h1>
+    <p class="cover-sub">Six phases. Each one builds on the last. This brief walks through every phase in detail — what it delivers, what it learns, what must happen before it starts, and what stands in its way.</p>
+
+    <div class="cover-grid">
+      <div class="cover-meta">
+        <div class="cover-meta-label">Prepared for</div>
+        <div class="cover-meta-val">Leadership · Board</div>
+      </div>
+      <div class="cover-meta">
+        <div class="cover-meta-label">Horizon</div>
+        <div class="cover-meta-val">Phase 0 <em>→</em> Phase 5</div>
+      </div>
+      <div class="cover-meta">
+        <div class="cover-meta-label">Status</div>
+        <div class="cover-meta-val">Phase 0 Complete</div>
+      </div>
+      <div class="cover-meta">
+        <div class="cover-meta-label">Next Gate</div>
+        <div class="cover-meta-val">Data Agreements</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STICKY JOURNEY NAV ============ -->
+  <nav class="journey">
+    <div class="journey-inner">
+      <a href="#phase-0" class="jstep">
+        <div class="jstep-dot">0</div>
+        <div class="jstep-name">Discovery</div>
+        <div class="jstep-state">Complete</div>
+      </a>
+      <a href="#phase-1" class="jstep">
+        <div class="jstep-dot">1</div>
+        <div class="jstep-name">Ground Truth</div>
+        <div class="jstep-state">Next</div>
+      </a>
+      <a href="#phase-2" class="jstep">
+        <div class="jstep-dot">2</div>
+        <div class="jstep-name">Smart</div>
+        <div class="jstep-state">Planned</div>
+      </a>
+      <a href="#phase-3" class="jstep">
+        <div class="jstep-dot">3</div>
+        <div class="jstep-name">Intelligent</div>
+        <div class="jstep-state">Indicative</div>
+      </a>
+      <a href="#phase-4" class="jstep">
+        <div class="jstep-dot">4</div>
+        <div class="jstep-name">Live</div>
+        <div class="jstep-state">Vision</div>
+      </a>
+      <a href="#phase-5" class="jstep">
+        <div class="jstep-dot">5</div>
+        <div class="jstep-name">Impact</div>
+        <div class="jstep-state">Vision</div>
+      </a>
+    </div>
+  </nav>
+
+  <!-- ============================================================ -->
+  <!-- PHASE 0 -->
+  <!-- ============================================================ -->
+  <section class="phase" data-p="0" id="phase-0">
+    <div class="phase-head">
+      <div class="phase-numeral">
+        <div class="phase-numeral-top">
+          <div class="phase-tag">Phase · Foundation</div>
+          <svg class="phase-icon-svg" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="8" y="10" width="24" height="22" rx="2"/>
+            <path d="M8 16 H32 M8 22 H32 M8 28 H32"/>
+            <circle cx="32" cy="10" r="4" fill="currentColor" stroke="none"/>
+          </svg>
+        </div>
+        <div class="phase-big-number">00</div>
+      </div>
+      <div class="phase-intro">
+        <div class="phase-name">Discovery <em>Map</em></div>
+        <div class="status-badge complete">✓ Complete</div>
+        <div class="status-detail">Platform is live and deployed on SK's server. All available data integrated. Gap diagnosis produced and documented.</div>
+      </div>
+    </div>
+
+    <div class="hero-row">
+      <div class="experience-card">
+        <div class="card-label"><span class="card-label-dot"></span>The Experience</div>
+        <div class="experience-text">PMO opens one screen and sees all of SK's water data for the first time. <strong>No more switching between files and tools.</strong></div>
+      </div>
+      <div class="bigbet-card">
+        <div class="card-label"><span class="card-label-dot"></span>The Big Bet</div>
+        <div class="bigbet-text">Unifying fragmented data into one map changes how SK sees and talks about water access — before any intelligence is added.</div>
+      </div>
+    </div>
+
+    <div class="value-strip">
+      <div class="value-strip-label">The Value</div>
+      <div class="value-strip-text">Full organizational visibility for the first time. Every data gap named and documented so Phase 1 knows exactly what to fix.</div>
+    </div>
+
+    <div class="detail-grid">
+      <div class="detail-block">
+        <div class="detail-block-head">
+          <div class="detail-block-title">
+            <svg class="detail-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 4 h10 v8 h-10 z M3 4 l5 4 l5-4"/></svg>
+            Building Blocks
+          </div>
+          <span class="detail-block-count">6 items</span>
+        </div>
+        <ul class="item-list">
+          <li>GIS platform built and deployed on SK's server</li>
+          <li>Data ingestion pipeline for all available datasets</li>
+          <li>Unified spatial database in geographic format</li>
+          <li>Layer toggle system per dataset</li>
+          <li>Demand Score algorithm per community</li>
+          <li>Data quality report per dataset</li>
+        </ul>
+      </div>
+
+      <div class="detail-block learnings">
+        <div class="detail-block-head">
+          <div class="detail-block-title">
+            <svg class="detail-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 11 v-2 M6 6 q0-2 2-2 t2 2 q0 1 -2 2"/></svg>
+            Key Learnings
+          </div>
+          <span class="detail-block-count">4 questions</span>
+        </div>
+        <ul class="item-list">
+          <li>Will the PMO use a map tool daily?</li>
+          <li>Which gaps matter most to fix first?</li>
+          <li>Does the Demand Score match how PMO thinks about urgency?</li>
+          <li>How much does the team trust unverified outputs?</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="detail-grid">
+      <div class="detail-block prereq">
+        <div class="detail-block-head">
+          <div class="detail-block-title">
+            <svg class="detail-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 8 h12 M8 2 v12"/></svg>
+            Pre-Requisites
+          </div>
+        </div>
+        <div class="prereq-none">None. Fully internal build. No external agreements needed.</div>
+      </div>
+
+      <div class="detail-block risks">
+        <div class="detail-block-head">
+          <div class="detail-block-title">
+            <svg class="detail-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2 l6 12 h-12 z M8 7 v3 M8 12 v0.5"/></svg>
+            Risks
+          </div>
+          <span class="detail-block-count">4 risks</span>
+        </div>
+        <ul class="item-list">
+          <li>Data too incomplete to produce any useful output</li>
+          <li>PMO does not engage and stays with old tools</li>
+          <li>Demand Score does not reflect operational reality</li>
+          <li>Server deployment issues on SK infrastructure</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="detail-block deliverables">
+      <div class="detail-block-head">
+        <div class="detail-block-title">
+          <svg class="detail-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="10" height="10" rx="1"/><path d="M6 8 l2 2 l3-4"/></svg>
+          Deliverables
+        </div>
+        <span class="detail-block-count">5 artifacts</span>
+      </div>
+      <ul class="item-list">
+        <li>Live GIS platform on SK's server</li>
+        <li>Interactive map with toggleable layers</li>
+        <li>Water Demand Score across all communities</li>
+        <li>Data quality report per dataset</li>
+        <li>Full gap diagnosis report</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- PHASE 1 -->
+  <!-- ============================================================ -->
+  <section class="phase" data-p="1" id="phase-1">
+    <div class="phase-head">
+      <div class="phase-numeral">
+        <div class="phase-numeral-top">
+          <div class="phase-tag">Phase · Verification</div>
+          <svg class="phase-icon-svg" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M20 6 L30 12 V22 L20 28 L10 22 V12 Z"/>
+            <path d="M15 18 L18 21 L25 14"/>
+          </svg>
+        </div>
+        <div class="phase-big-number">01</div>
+      </div>
+      <div class="phase-intro">
+        <div class="phase-name">Ground Truth <em>Map</em></div>
+        <div class="status-badge next">→ Next · Blocked</div>
+        <div class="status-detail">Development ready to begin. Blocked on data sharing agreements with NWC and NPO providers. <strong style="color:var(--red)">No development starts until agreements are signed.</strong></div>
+      </div>
+    </div>
+
+    <div class="hero-row">
+      <div class="experience-card">
+        <div class="card-label"><span class="card-label-dot"></span>The Experience</div>
+        <div class="experience-text">PMO verifies every map layer in working sessions. When done — <strong>they trust what they see.</strong> NWC updates a station and it appears on the map immediately. No email. No request. No waiting.</div>
+      </div>
+      <div class="bigbet-card">
+        <div class="card-label"><span class="card-label-dot"></span>The Big Bet</div>
+        <div class="bigbet-text">Deep investment in data verification before any intelligence is built produces a foundation every future phase can depend on completely.</div>
+      </div>
+    </div>
+
+    <div class="value-strip">
+      <div class="value-strip-label">The Value</div>
+      <div class="value-strip-text">Map reflects ground truth. Demand Score and Heatmap trusted and visible for the first time. Partners manage their own data. Historical records ready to power Phase 2 AI.</div>
+    </div>
+
+    <div class="detail-grid">
+      <div class="detail-block">
+        <div class="detail-block-head">
+          <div class="detail-block-title">
+            <svg class="detail-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 4 h10 v8 h-10 z M3 4 l5 4 l5-4"/></svg>
+            Building Blocks
+          </div>
+          <span class="detail-block-count">8 items</span>
+        </div>
+        <ul class="item-list">
+          <li>Data sharing agreements signed with NWC and NPO providers</li>
+          <li>ETL pipelines for every new dataset</li>
+          <li>PMO verification sessions per map layer</li>
+          <li>Provider data portal for NWC and NPOs</li>
+          <li>Data quality dashboard — completeness and freshness per dataset</li>
+          <li>Historical records structured as ML training data</li>
+          <li>Demand Score recalculated on verified data</li>
+          <li>Heatmap activated on verified data</li>
+        </ul>
+      </div>
+
+      <div class="detail-block learnings">
+        <div class="detail-block-head">
+          <div class="detail-block-title">
+            <svg class="detail-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 11 v-2 M6 6 q0-2 2-2 t2 2 q0 1 -2 2"/></svg>
+            Key Learnings
+          </div>
+          <span class="detail-block-count">4 questions</span>
+        </div>
+        <ul class="item-list">
+          <li>How long do government data agreements actually take?</li>
+          <li>Which datasets shift demand scores most when verified?</li>
+          <li>Will NPOs maintain their data through the portal?</li>
+          <li>How much does the score change on real vs. assumed data?</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="detail-grid">
+      <div class="detail-block prereq critical">
+        <div class="detail-block-head">
+          <div class="detail-block-title">
+            <svg class="detail-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="6" width="10" height="8" rx="1"/><path d="M5 6 v-2 q0-2 3-2 t3 2 v2"/></svg>
+            Pre-Requisites
+          </div>
+          <span class="detail-block-count">6 blockers</span>
+        </div>
+        <ul class="item-list">
+          <li>NWC data agreement signed — stations, capacity, tanker routes</li>
+          <li>NPO data agreements signed — Erwaa, Al Rajhi, others</li>
+          <li>Current population data</li>
+          <li>Village-level admin boundaries</li>
+          <li>Road network data confirmed</li>
+          <li>PMO commits to two working sessions per month</li>
+        </ul>
+      </div>
+
+      <div class="detail-block risks">
+        <div class="detail-block-head">
+          <div class="detail-block-title">
+            <svg class="detail-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2 l6 12 h-12 z M8 7 v3 M8 12 v0.5"/></svg>
+            Risks
+          </div>
+          <span class="detail-block-count">6 risks</span>
+        </div>
+        <ul class="item-list">
+          <li>NWC agreement delayed</li>
+          <li>Data received is still incomplete or unusable</li>
+          <li>NPOs refuse to share infrastructure data</li>
+          <li>PMO cannot commit to verification sessions</li>
+          <li>Historical records too sparse to train reliable ML</li>
+          <li>Provider portal not adopted — partners stay on email</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="detail-block deliverables">
+      <div class="detail-block-head">
+        <div class="detail-block-title">
+          <svg class="detail-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="10" height="10" rx="1"/><path d="M6 8 l2 2 l3-4"/></svg>
+          Deliverables
+        </div>
+        <span class="detail-block-count">6 artifacts</span>
+      </div>
+      <ul class="item-list">
+        <li>Verified map with all data layers confirmed by PMO</li>
+        <li>Demand Score live on verified data</li>
+        <li>Heatmap live on verified data</li>
+        <li>Provider upload portal for NWC and NPOs</li>
+        <li>Data quality dashboard — live completeness view</li>
+        <li>Structured historical records database ready for ML</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ THE GATE — standout between Phase 1 and Phase 2 ============ -->
+  <section class="gate-callout">
+    <div class="gate-label">⚠ The Single Most Important Thing to Understand</div>
+    <h2 class="gate-title">Everything downstream depends on one decision: <em>sign the data agreements now.</em></h2>
+    <p class="gate-body">The platform is only as powerful as the data feeding it. Phases 2 through 5 — all of the intelligence, all of the recommendations, all of the live monitoring, all of the donor-facing proof — depend entirely on Phase 1 being done completely and correctly. <strong>Phase 1 depends on data sharing agreements with NWC and NPO providers. Those agreements cannot be signed by the development team. They require SK's leadership to make them a priority and pursue them actively.</strong> Everything else is ready to build. The data agreements are the gate.</p>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- PHASE 2 -->
+  <!-- ============================================================ -->
+  <section class="phase" data-p="2" id="phase-2">
+    <div class="phase-head">
+      <div class="phase-numeral">
+        <div class="phase-numeral-top">
+          <div class="phase-tag">Phase · Intelligence</div>
+          <svg class="phase-icon-svg" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="20" cy="20" r="5"/>
+            <circle cx="10" cy="10" r="3"/>
+            <circle cx="30" cy="10" r="3"/>
+            <circle cx="10" cy="30" r="3"/>
+            <circle cx="30" cy="30" r="3"/>
+            <path d="M12 12 L17 17 M28 12 L23 17 M12 28 L17 23 M28 28 L23 23"/>
+          </svg>
+        </div>
+        <div class="phase-big-number">02</div>
+      </div>
+      <div class="phase-intro">
+        <div class="phase-name">Smart <em>Map</em></div>
+        <div class="status-badge planned">○ Planned</div>
+        <div class="status-detail">Scope defined. Cannot begin until Phase 1 is fully complete — all data verified, all provider agreements active, historical records confirmed ML-ready.</div>
+      </div>
+    </div>
+
+    <div class="hero-row">
+      <div class="experience-card">
+        <div class="card-label"><span class="card-label-dot"></span>The Experience</div>
+        <div class="experience-text">Proposal arrives at 9am. By 9:05am the platform has assessed the site, calculated drive times, analyzed satellite imagery, and recommended a better solution. <strong>PMO opens the file, and the work is already half done.</strong></div>
+      </div>
+      <div class="bigbet-card">
+        <div class="card-label"><span class="card-label-dot"></span>The Big Bet</div>
+        <div class="bigbet-text">ML trained on SK's own verified history produces better recommendations than individual judgement — and the PMO will trust and act on them.</div>
+      </div>
+    </div>
+
+    <div class="value-strip">
+      <div class="value-strip-label">The Value</div>
+      <div class="value-strip-text">Proposals assessed in minutes not weeks. Field visits become the exception. Every recommendation backed by SK's full project history. Duplicate projects caught before approval.</div>
+    </div>
+
+    <div class="detail-grid">
+      <div class="detail-block">
+        <div class="detail-block-head">
+          <div class="detail-block-title">
+            <svg class="detail-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 4 h10 v8 h-10 z M3 4 l5 4 l5-4"/></svg>
+            Building Blocks
+          </div>
+          <span class="detail-block-count">8 items</span>
+        </div>
+        <ul class="item-list">
+          <li>ML recommendation engine trained on Phase 1 historical records</li>
+          <li>Proposal submission API integration</li>
+          <li>Automated spatial analysis on every submission</li>
+          <li>Computer vision pipeline on satellite imagery</li>
+          <li>pgRouting drive time on verified road network</li>
+          <li>Project requested vs. recommended comparison view</li>
+          <li>Overlap detection against all provider coverage zones</li>
+          <li>Role-based user access — PMO, leadership, admin</li>
+        </ul>
+      </div>
+
+      <div class="detail-block learnings">
+        <div class="detail-block-head">
+          <div class="detail-block-title">
+            <svg class="detail-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 11 v-2 M6 6 q0-2 2-2 t2 2 q0 1 -2 2"/></svg>
+            Key Learnings
+          </div>
+          <span class="detail-block-count">5 questions</span>
+        </div>
+        <ul class="item-list">
+          <li>How accurate are ML recommendations vs. experienced PMO decisions?</li>
+          <li>Which site factors matter most to actual PMO decisions?</li>
+          <li>How does PMO respond when recommendation differs from NPO proposal?</li>
+          <li>What is the real time saving per proposal?</li>
+          <li>Which request types still need a field visit?</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="detail-grid">
+      <div class="detail-block prereq">
+        <div class="detail-block-head">
+          <div class="detail-block-title">
+            <svg class="detail-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="6" width="10" height="8" rx="1"/><path d="M5 6 v-2 q0-2 3-2 t3 2 v2"/></svg>
+            Pre-Requisites
+          </div>
+          <span class="detail-block-count">4 items</span>
+        </div>
+        <ul class="item-list">
+          <li>Phase 1 fully and completely done</li>
+          <li>Historical records confirmed ML-ready by dev team</li>
+          <li>PMO sessions scheduled to validate early recommendations</li>
+          <li>Satellite imagery provider agreement confirmed</li>
+        </ul>
+      </div>
+
+      <div class="detail-block risks">
+        <div class="detail-block-head">
+          <div class="detail-block-title">
+            <svg class="detail-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2 l6 12 h-12 z M8 7 v3 M8 12 v0.5"/></svg>
+            Risks
+          </div>
+          <span class="detail-block-count">5 risks</span>
+        </div>
+        <ul class="item-list">
+          <li>Historical records too thin — recommendations too generic to be useful</li>
+          <li>PMO does not trust automated recommendations</li>
+          <li>Satellite analysis inaccurate in certain terrain types</li>
+          <li>API integration with proposal system blocked</li>
+          <li>Overlap detection misses providers not yet in the portal</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="detail-block deliverables">
+      <div class="detail-block-head">
+        <div class="detail-block-title">
+          <svg class="detail-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="10" height="10" rx="1"/><path d="M6 8 l2 2 l3-4"/></svg>
+          Deliverables
+        </div>
+        <span class="detail-block-count">7 artifacts</span>
+      </div>
+      <ul class="item-list">
+        <li>Live proposal intelligence pipeline — every submission auto-assessed</li>
+        <li>ML recommendation engine with confidence scoring</li>
+        <li>Satellite site assessment tool</li>
+        <li>Road-based drive time calculator</li>
+        <li>Proposed vs. recommended comparison interface</li>
+        <li>Live overlap detection against all provider zones</li>
+        <li>Role-based access system</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- PHASE 3 -->
+  <!-- ============================================================ -->
+  <section class="phase" data-p="3" id="phase-3">
+    <div class="phase-head">
+      <div class="phase-numeral">
+        <div class="phase-numeral-top">
+          <div class="phase-tag">Phase · Conversational</div>
+          <svg class="phase-icon-svg" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M10 26 Q10 12 20 12 Q30 12 30 26 L28 30 L20 30 Q10 30 10 26 Z"/>
+            <circle cx="16" cy="22" r="1.5" fill="currentColor"/>
+            <circle cx="20" cy="22" r="1.5" fill="currentColor"/>
+            <circle cx="24" cy="22" r="1.5" fill="currentColor"/>
+          </svg>
+        </div>
+        <div class="phase-big-number">03</div>
+      </div>
+      <div class="phase-intro">
+        <div class="phase-name">Intelligent <em>Map</em></div>
+        <div class="status-badge indicative">◔ Indicative</div>
+        <div class="status-detail">Features defined but not yet scoped for development. Begins only after Phase 2 has run for a minimum operational period and produced enough decision history for the AI to learn from.</div>
+      </div>
+    </div>
+
+    <div class="hero-row">
+      <div class="experience-card">
+        <div class="card-label"><span class="card-label-dot"></span>The Experience</div>
+        <div class="experience-text">Team member types in Arabic: <em>"Which villages in Najran have critical demand and no project within 60km?"</em> Answer appears in seconds with map highlights and a priority order. <strong>Leadership runs a simulation before a board meeting and walks in with the numbers already done.</strong></div>
+      </div>
+      <div class="bigbet-card">
+        <div class="card-label"><span class="card-label-dot"></span>The Big Bet</div>
+        <div class="bigbet-text">Removing the technical barrier between decision-makers and data — through natural language — expands the platform from a PMO tool to an organization-wide intelligence layer.</div>
+      </div>
+    </div>
+
+    <div class="value-strip">
+      <div class="value-strip-label">The Value</div>
+      <div class="value-strip-text">Anyone in SK interrogates the platform without technical skills. Decisions faster with more evidence. Leadership briefs government from one screen. SK acts before crises — not after.</div>
+    </div>
+
+    <div class="detail-grid">
+      <div class="detail-block">
+        <div class="detail-block-head">
+          <div class="detail-block-title">
+            <svg class="detail-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 4 h10 v8 h-10 z M3 4 l5 4 l5-4"/></svg>
+            Building Blocks
+          </div>
+          <span class="detail-block-count">7 items</span>
+        </div>
+        <ul class="item-list">
+          <li>LLM integrated with spatial query translation layer</li>
+          <li>Arabic and English language support throughout</li>
+          <li>Project simulation engine with map-based before-and-after view</li>
+          <li>Predictive demand model on population projections and demand history</li>
+          <li>Auto-generated proposal briefings</li>
+          <li>Auto-generated simulation and impact reports</li>
+          <li>CEO and leadership national dashboard</li>
+        </ul>
+      </div>
+
+      <div class="detail-block learnings">
+        <div class="detail-block-head">
+          <div class="detail-block-title">
+            <svg class="detail-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 11 v-2 M6 6 q0-2 2-2 t2 2 q0 1 -2 2"/></svg>
+            Key Learnings
+          </div>
+          <span class="detail-block-count">4 questions</span>
+        </div>
+        <ul class="item-list">
+          <li>Which questions do PMO and leadership ask most — does AI answer them reliably?</li>
+          <li>How accurate are demand predictions vs. communities that later file requests?</li>
+          <li>Does simulation change what leadership decides to fund?</li>
+          <li>What AI confidence level is needed before PMO acts without extra verification?</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="detail-grid">
+      <div class="detail-block prereq">
+        <div class="detail-block-head">
+          <div class="detail-block-title">
+            <svg class="detail-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="6" width="10" height="8" rx="1"/><path d="M5 6 v-2 q0-2 3-2 t3 2 v2"/></svg>
+            Pre-Requisites
+          </div>
+          <span class="detail-block-count">3 items</span>
+        </div>
+        <ul class="item-list">
+          <li>Phase 2 operational for a minimum run period</li>
+          <li>Population growth projections loaded</li>
+          <li>Leadership sessions completed for dashboard design</li>
+        </ul>
+      </div>
+
+      <div class="detail-block risks">
+        <div class="detail-block-head">
+          <div class="detail-block-title">
+            <svg class="detail-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2 l6 12 h-12 z M8 7 v3 M8 12 v0.5"/></svg>
+            Risks
+          </div>
+          <span class="detail-block-count">5 risks</span>
+        </div>
+        <ul class="item-list">
+          <li>AI assistant gives confident but wrong answers — erodes trust</li>
+          <li>Predictive model produces false signals before enough history has built up</li>
+          <li>Leadership does not engage with dashboard design</li>
+          <li>Partner feeds arrive inconsistently or need heavy manual processing</li>
+          <li>AI struggles with Arabic dialects or water sector terminology</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="detail-block deliverables">
+      <div class="detail-block-head">
+        <div class="detail-block-title">
+          <svg class="detail-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="10" height="10" rx="1"/><path d="M6 8 l2 2 l3-4"/></svg>
+          Deliverables
+        </div>
+        <span class="detail-block-count">6 artifacts</span>
+      </div>
+      <ul class="item-list">
+        <li>AI conversational assistant — Arabic and English in map interface</li>
+        <li>Project simulation tool with before-and-after map view</li>
+        <li>Predictive demand engine with forward-looking risk layer</li>
+        <li>Auto-generated proposal briefings</li>
+        <li>Auto-generated simulation and impact reports</li>
+        <li>CEO and leadership national dashboard</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- PHASE 4 -->
+  <!-- ============================================================ -->
+  <section class="phase" data-p="4" id="phase-4">
+    <div class="phase-head">
+      <div class="phase-numeral">
+        <div class="phase-numeral-top">
+          <div class="phase-tag">Phase · Real-Time</div>
+          <svg class="phase-icon-svg" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="20" cy="20" r="3" fill="currentColor"/>
+            <circle cx="20" cy="20" r="9"/>
+            <circle cx="20" cy="20" r="15"/>
+          </svg>
+        </div>
+        <div class="phase-big-number">04</div>
+      </div>
+      <div class="phase-intro">
+        <div class="phase-name">Live <em>Map</em></div>
+        <div class="status-badge vision">◌ Vision</div>
+        <div class="status-detail">Direction confirmed. Detailed scoping begins during Phase 3. IOT pilot must be approved and planned before any national commitment is made.</div>
+      </div>
+    </div>
+
+    <div class="hero-row">
+      <div class="experience-card">
+        <div class="card-label"><span class="card-label-dot"></span>The Experience</div>
+        <div class="experience-text">2am. A tank in Najran goes offline. By 2:05am the map has flagged it, recalculated demand scores for eleven affected communities, and sent an alert. <strong>Nobody filed a report. Nobody was in the field. The platform noticed first.</strong></div>
+      </div>
+      <div class="bigbet-card">
+        <div class="card-label"><span class="card-label-dot"></span>The Big Bet</div>
+        <div class="bigbet-text">Connecting the platform to real physical infrastructure eliminates the most dangerous gap in SK's operations — the time between when infrastructure fails and when anyone knows about it.</div>
+      </div>
+    </div>
+
+    <div class="value-strip">
+      <div class="value-strip-label">The Value</div>
+      <div class="value-strip-text">Failures visible in hours not weeks. No community silently loses water access. Live operational picture of every monitored asset. Resources redirected immediately when failure occurs.</div>
+    </div>
+
+    <div class="detail-grid">
+      <div class="detail-block">
+        <div class="detail-block-head">
+          <div class="detail-block-title">
+            <svg class="detail-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 4 h10 v8 h-10 z M3 4 l5 4 l5-4"/></svg>
+            Building Blocks
+          </div>
+          <span class="detail-block-count">8 items</span>
+        </div>
+        <ul class="item-list">
+          <li>Live API connections to NWC and partner operational systems</li>
+          <li>IOT sensor integration layer for continuous sensor data streams</li>
+          <li>IOT pilot program in one region before national rollout</li>
+          <li>Infrastructure health map layer — green, amber, red per asset</li>
+          <li>Automated failure detection and alert system</li>
+          <li>Real-time demand score recalculation on source failure</li>
+          <li>Community status update engine — automatic served-to-unserved transitions</li>
+          <li>Hardware procurement, installation, and maintenance planning</li>
+        </ul>
+      </div>
+
+      <div class="detail-block learnings">
+        <div class="detail-block-head">
+          <div class="detail-block-title">
+            <svg class="detail-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 11 v-2 M6 6 q0-2 2-2 t2 2 q0 1 -2 2"/></svg>
+            Key Learnings
+          </div>
+          <span class="detail-block-count">5 questions</span>
+        </div>
+        <ul class="item-list">
+          <li>How quickly can sensor failures be distinguished from real infrastructure failures?</li>
+          <li>Which asset types produce the most actionable data when monitored?</li>
+          <li>How often do alerts produce false positives — and what thresholds minimize noise?</li>
+          <li>Which providers share live data willingly — and which do not?</li>
+          <li>What minimum sensor coverage makes the live map meaningfully more accurate than periodic data?</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="detail-grid">
+      <div class="detail-block prereq">
+        <div class="detail-block-head">
+          <div class="detail-block-title">
+            <svg class="detail-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="6" width="10" height="8" rx="1"/><path d="M5 6 v-2 q0-2 3-2 t3 2 v2"/></svg>
+            Pre-Requisites
+          </div>
+          <span class="detail-block-count">4 items</span>
+        </div>
+        <ul class="item-list">
+          <li>IOT hardware procurement planned and budgeted</li>
+          <li>Physical access to infrastructure agreed with NWC and NPO partners</li>
+          <li>Live API access agreements with NWC operational systems</li>
+          <li>IOT pilot site selected, scoped, and approved</li>
+        </ul>
+      </div>
+
+      <div class="detail-block risks">
+        <div class="detail-block-head">
+          <div class="detail-block-title">
+            <svg class="detail-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2 l6 12 h-12 z M8 7 v3 M8 12 v0.5"/></svg>
+            Risks
+          </div>
+          <span class="detail-block-count">6 risks</span>
+        </div>
+        <ul class="item-list">
+          <li>NWC does not agree to live API access — data stays periodic</li>
+          <li>IOT hardware difficult to install or power in remote locations</li>
+          <li>Sensor data quality too poor — too much noise, too many gaps</li>
+          <li>Pilot region not representative of national infrastructure variety</li>
+          <li>Platform cannot handle volume and frequency of live data streams</li>
+          <li>IOT maintenance in remote areas financially unsustainable</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="detail-block deliverables">
+      <div class="detail-block-head">
+        <div class="detail-block-title">
+          <svg class="detail-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="10" height="10" rx="1"/><path d="M6 8 l2 2 l3-4"/></svg>
+          Deliverables
+        </div>
+        <span class="detail-block-count">7 artifacts</span>
+      </div>
+      <ul class="item-list">
+        <li>Live API connections to NWC and partner systems</li>
+        <li>IOT sensor integration layer</li>
+        <li>Infrastructure health map layer — real-time asset status</li>
+        <li>Automated failure detection and alert system</li>
+        <li>Real-time demand score recalculation engine</li>
+        <li>Community automatic status update system</li>
+        <li>IOT pilot program report with national rollout recommendations</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- PHASE 5 -->
+  <!-- ============================================================ -->
+  <section class="phase" data-p="5" id="phase-5">
+    <div class="phase-head">
+      <div class="phase-numeral">
+        <div class="phase-numeral-top">
+          <div class="phase-tag">Phase · Evidence</div>
+          <svg class="phase-icon-svg" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M8 30 L16 22 L22 26 L32 16"/>
+            <path d="M26 16 H32 V22"/>
+            <circle cx="32" cy="16" r="2" fill="currentColor"/>
+          </svg>
+        </div>
+        <div class="phase-big-number">05</div>
+      </div>
+      <div class="phase-intro">
+        <div class="phase-name">Impact <em>Map</em></div>
+        <div class="status-badge vision-v">◌ Vision</div>
+        <div class="status-detail">Concept confirmed. Full scoping begins during Phase 4. Legal and governance review must be completed before any external access opens.</div>
+      </div>
+    </div>
+
+    <div class="hero-row">
+      <div class="experience-card">
+        <div class="card-label"><span class="card-label-dot"></span>The Experience</div>
+        <div class="experience-text">Donor logs in on a Tuesday. Sees the tank they funded 18 months ago — 2.4 million litres dispensed, 680 people served daily, demand score dropped from 84 to 11. <strong>They screenshot it and send it to their own board. They did not ask SK for any of this. It was already there.</strong></div>
+      </div>
+      <div class="bigbet-card">
+        <div class="card-label"><span class="card-label-dot"></span>The Big Bet</div>
+        <div class="bigbet-text">Turning live operational data into transparent real-time impact evidence permanently changes SK's relationship with donors — from trust to proof — and compounds in value as the ML engine improves with every measured outcome.</div>
+      </div>
+    </div>
+
+    <div class="value-strip">
+      <div class="value-strip-label">The Value</div>
+      <div class="value-strip-text">Every riyal traceable to a measured outcome. Donors verify impact live without waiting for a report. Recommendation engine improves continuously. SK's credibility backed by evidence not self-reporting.</div>
+    </div>
+
+    <div class="detail-grid">
+      <div class="detail-block">
+        <div class="detail-block-head">
+          <div class="detail-block-title">
+            <svg class="detail-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 4 h10 v8 h-10 z M3 4 l5 4 l5-4"/></svg>
+            Building Blocks
+          </div>
+          <span class="detail-block-count">8 items</span>
+        </div>
+        <ul class="item-list">
+          <li>Impact measurement pipeline — sensor data vs. Phase 2 projections per project</li>
+          <li>Demand score before-and-after engine per completed project</li>
+          <li>Donor impact portal — live usage, beneficiaries, uptime, score change</li>
+          <li>Internal leadership impact dashboard — full portfolio view</li>
+          <li>Government and sector transparency view — national aggregate picture</li>
+          <li>ML retraining pipeline — outcomes fed back into recommendation engine</li>
+          <li>Legal review and governance framework for external access</li>
+          <li>Donor and NPO onboarding process</li>
+        </ul>
+      </div>
+
+      <div class="detail-block learnings">
+        <div class="detail-block-head">
+          <div class="detail-block-title">
+            <svg class="detail-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 11 v-2 M6 6 q0-2 2-2 t2 2 q0 1 -2 2"/></svg>
+            Key Learnings
+          </div>
+          <span class="detail-block-count">5 questions</span>
+        </div>
+        <ul class="item-list">
+          <li>How closely do actual outcomes match Phase 2 simulation projections?</li>
+          <li>Does real-time impact data improve donor retention or funding levels?</li>
+          <li>Which outcome metrics matter most to different donor types?</li>
+          <li>How much does feeding outcomes back into the ML engine improve future recommendations — and over what timeframe?</li>
+          <li>Will government partners use the platform as a planning tool once they have read-only access?</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="detail-grid">
+      <div class="detail-block prereq">
+        <div class="detail-block-head">
+          <div class="detail-block-title">
+            <svg class="detail-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="6" width="10" height="8" rx="1"/><path d="M5 6 v-2 q0-2 3-2 t3 2 v2"/></svg>
+            Pre-Requisites
+          </div>
+          <span class="detail-block-count">5 items</span>
+        </div>
+        <ul class="item-list">
+          <li>Phase 4 IOT operational across enough projects to produce meaningful data</li>
+          <li>Legal review of data visibility rules completed</li>
+          <li>Donor onboarding process agreed with corporate relations team</li>
+          <li>Governance framework defining access levels per external user type</li>
+          <li>Enough completed projects with sensor coverage to demonstrate impact credibly</li>
+        </ul>
+      </div>
+
+      <div class="detail-block risks">
+        <div class="detail-block-head">
+          <div class="detail-block-title">
+            <svg class="detail-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2 l6 12 h-12 z M8 7 v3 M8 12 v0.5"/></svg>
+            Risks
+          </div>
+          <span class="detail-block-count">6 risks</span>
+        </div>
+        <ul class="item-list">
+          <li>Phase 4 IOT coverage too sparse for statistically meaningful impact data</li>
+          <li>Actual outcomes differ significantly from projections — undermines confidence in simulation tool</li>
+          <li>Legal review delays or restricts what the donor portal can show</li>
+          <li>Donors do not engage with the portal — prefer traditional reporting</li>
+          <li>ML retraining produces unexpected recommendation changes the PMO cannot explain</li>
+          <li>Government raises concerns about data accuracy before platform is fully validated</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="detail-block deliverables">
+      <div class="detail-block-head">
+        <div class="detail-block-title">
+          <svg class="detail-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="10" height="10" rx="1"/><path d="M6 8 l2 2 l3-4"/></svg>
+          Deliverables
+        </div>
+        <span class="detail-block-count">7 artifacts</span>
+      </div>
+      <ul class="item-list">
+        <li>Impact measurement pipeline per project</li>
+        <li>Demand score before-and-after dashboard per project</li>
+        <li>Donor impact portal — live usage, beneficiaries, uptime per funded project</li>
+        <li>Internal leadership impact dashboard</li>
+        <li>Government and sector transparency view</li>
+        <li>ML model retraining pipeline on completed outcomes</li>
+        <li>Governance and access control layer per external user type</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div><strong>Suqya+</strong> · Detailed Phase Brief · For SK Leadership</div>
+    <div>Phases are sequential · Each unlocks the next · Data agreements are the gate</div>
+  </footer>
+
+</div>
+
+</body>
+</html>
